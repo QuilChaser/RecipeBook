@@ -127,7 +127,8 @@ export default {
       try {
         await axios.put('/api/recipes/' + item._id, {
           title: this.findItem.title,
-          desc: this.findItem.desc,
+          ingred: this.findItem.ingred,
+          instr: this.findItem.instr,
         });
         this.findItem = null;
         this.getItems();
