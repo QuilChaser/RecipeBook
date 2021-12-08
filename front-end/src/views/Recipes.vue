@@ -82,7 +82,7 @@ export default {
       try {
         const formData = new FormData();
         if (this.file != null) {
-          formData.append('photo', this.file, this.file.name);
+          formData.append('photo', this.file, this.file.name)
           let r1 = await axios.post('/api/photos', formData);
           let r2 = await axios.post('/api/recipes', {
             title: this.title,
@@ -225,16 +225,20 @@ button:active {
 }
 
 #add .upload {
-    width: 50%;
-    white-space: pre-wrap;
+  width: 50%;
+  white-space: pre-wrap;
+  text-align: left;
+  padding-left: 4%;
 }
 
 .form-edit {
   padding-top: 1rem;
 }
-.upload-edit, .actions {
+
+.upload-edit,
+.actions {
   padding: 1rem;
-  text-align: left!important;
+  text-align: left !important;
 }
 
 /* Uploaded images */
@@ -252,7 +256,7 @@ button:active {
   width: 50%;
   white-space: pre-wrap;
   margin-left: 2%;
-  text-align: left!important;
+  text-align: left !important;
 }
 
 /* Suggestions */
@@ -272,20 +276,27 @@ button:active {
 
 /* Masonry on small screens */
 @media only screen and (max-width: 767px) {
-  #add, #edit {
+
+  #add,
+  #edit {
     display: block;
   }
-  #add .upload, #add .form {
+
+  #add .upload,
+  #add .form {
     width: 100%;
   }
+
   #add .upload {
     padding-top: 2rem;
   }
-  #edit .form, #edit .upload-edit, .actions {
+
+  #edit .form,
+  #edit .upload-edit,
+  .actions {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
   }
 }
-
 </style>
