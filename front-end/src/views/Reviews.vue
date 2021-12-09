@@ -167,7 +167,6 @@ button {
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   width: 100%;
-  max-width: 800px;
 }
 
 textarea {
