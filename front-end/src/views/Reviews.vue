@@ -6,7 +6,6 @@
       <h2>Recipe: {{item.recipe}}</h2>
       <h3>By: {{item.name}}</h3>
       <p>{{item.review}}</p>
-      <!-- <button class="editReview" @click="edit(item)">Edit</button> -->
       <button class="delReview" @click="deleteReview(item)">Delete</button>
       <hr />
     </div>
@@ -16,17 +15,7 @@
     <div class="uploaded" v-if="uploaded">
       <h3>Thanks! Your review was submitted!</h3>
     </div>
-    <div class="form" v-else>
-      <input v-model="name" placeholder="Your Name"><br />
-      <input v-model="recipe" placeholder="Recipe Name">
-      <div class="suggestions" v-if="suggestions.length > 0">
-        <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectRecipe(s)">{{s.title}}
-        </div>
-      </div>
-      <textarea v-model="review" placeholder="Your Review"></textarea><br />
-      <button @click="editReview">Update</button>
-    </div>
-    <!-- <div class="form" v-if="editing">
+    <div class="form">
       <input v-model="name" placeholder="Your Name"><br />
       <input v-model="recipe" placeholder="Recipe Name">
       <div class="suggestions" v-if="suggestions.length > 0">
@@ -35,7 +24,7 @@
       </div>
       <textarea v-model="review" placeholder="Your Review"></textarea><br />
       <button @click="upload">Upload</button>
-    </div> -->
+    </div>
   </section>
 </div>
 </template>
@@ -132,7 +121,7 @@ export default {
     //   this.recipe = item.reicpe;
     //   this.review = item.review;
     //   this.editing = true;
-    // }
+    // },
     selectRecipe(item) {
       this.recipe = item.title;
       this.findRecipe = item;
