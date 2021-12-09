@@ -6,6 +6,8 @@
       <h2>Recipe: {{item.recipe}}</h2>
       <h3>By: {{item.name}}</h3>
       <p>{{item.review}}</p>
+      <!-- <button class="editReview" @click="edit(item)">Edit</button> -->
+      <button class="delReview" @click="deleteReview(item)">Delete</button>
       <hr />
     </div>
   </section>
@@ -14,7 +16,17 @@
     <div class="uploaded" v-if="uploaded">
       <h3>Thanks! Your review was submitted!</h3>
     </div>
-    <div class="form">
+    <div class="form" v-else>
+      <input v-model="name" placeholder="Your Name"><br />
+      <input v-model="recipe" placeholder="Recipe Name">
+      <div class="suggestions" v-if="suggestions.length > 0">
+        <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectRecipe(s)">{{s.title}}
+        </div>
+      </div>
+      <textarea v-model="review" placeholder="Your Review"></textarea><br />
+      <button @click="editReview">Update</button>
+    </div>
+    <!-- <div class="form" v-if="editing">
       <input v-model="name" placeholder="Your Name"><br />
       <input v-model="recipe" placeholder="Recipe Name">
       <div class="suggestions" v-if="suggestions.length > 0">
@@ -23,7 +35,7 @@
       </div>
       <textarea v-model="review" placeholder="Your Review"></textarea><br />
       <button @click="upload">Upload</button>
-    </div>
+    </div> -->
   </section>
 </div>
 </template>
@@ -41,7 +53,7 @@ export default {
       recipe: "",
       review: "",
       findRecipe: "",
-      uploaded:false,
+      uploaded: false,
     }
   },
   created() {
@@ -72,6 +84,30 @@ export default {
         console.log(error);
       }
     },
+    async deleteReview(item) {
+      try {
+        await axios.delete('/api/reviews/' + item._id);
+        this.findItem = null;
+        this.getReviews();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // async editReview(item) {
+    //   try {
+    //     await axios.put('/api/recipes/' + item._id, {
+    //       title: this.findItem.title,
+    //       ingred: this.findItem.ingred,
+    //       instr: this.findItem.instr,
+    //     });
+    //     this.findItem = null;
+    //     this.getItems();
+    //     return true;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     async getReviews() {
       try {
         let response = await axios.get("/api/reviews");
@@ -90,6 +126,13 @@ export default {
         console.log(error);
       }
     },
+    // edit(item) {
+    //   this.editingItem = item;
+    //   this.title = item.title;
+    //   this.recipe = item.reicpe;
+    //   this.review = item.review;
+    //   this.editing = true;
+    // }
     selectRecipe(item) {
       this.recipe = item.title;
       this.findRecipe = item;
