@@ -18,7 +18,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/recipes', {
 // Configure multer so that it will upload to '../front-end/public/images'
 const multer = require('multer')
 const upload = multer({
-  dest: '../front-end/public/images/',
+  dest: '/var/www/recipes.chadquilling.xyz/images/',
   limits: {
     fileSize: 10000000
   }
